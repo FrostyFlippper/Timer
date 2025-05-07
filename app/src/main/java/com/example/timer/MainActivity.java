@@ -2,6 +2,7 @@ package com.example.timer;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +19,20 @@ public class MainActivity extends AppCompatActivity{
 
         textView.setOnClickListener(new listener());
 
+        Timer timer = new Timer(10);
 
-        TimerThread timerThread = new TimerThread(textView);
-        timerThread.addToList(timer);
-        timerThread.start();
+        View rootView = findViewById(android.R.id.content);
+        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                // Start the timer thread after the layout is fully loaded
+                TimerThread timerThread = new TimerThread(textView);
+                timerThread.addToList(timer);
+                timerThread.start();
+            }
+        });
     }
 
     class listener implements View.OnClickListener{
