@@ -18,10 +18,12 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView textView = findViewById(R.id.button);
+        TextView textView = findViewById(R.id.timerTextView);
+        Button resumeButton = findViewById(R.id.resumeButton);
+        Button pauseButton = findViewById(R.id.pauseButton);
 
-        textView.setOnClickListener(new listener());
-
+        resumeButton.setOnClickListener(new resumeButtonListener());
+        pauseButton.setOnClickListener(new pauseButtonListener());
 
         View rootView = findViewById(android.R.id.content);
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
