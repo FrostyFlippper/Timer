@@ -3,12 +3,15 @@ package com.example.timer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity{
+
+    Timer timer = new Timer(10);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +22,6 @@ public class MainActivity extends AppCompatActivity{
 
         textView.setOnClickListener(new listener());
 
-        Timer timer = new Timer(10);
 
         View rootView = findViewById(android.R.id.content);
         rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -35,7 +37,14 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-    class listener implements View.OnClickListener{
+    class resumeButtonListener implements View.OnClickListener{
+        @Override
+        public void onClick(View v) {
+            if(timer.getTimerState().)
+        }
+    }
+
+    class pauseButtonListener implements View.OnClickListener{
         @Override
         public void onClick(View v) {
 

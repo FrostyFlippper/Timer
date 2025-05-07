@@ -3,8 +3,7 @@ package com.example.timer;
 public class Timer {
     private int currentTime;
     private int maxTime;
-
-    private boolean isFinished;
+    private TimerState timerState;
 
     public Timer(int maxTime){
         this.maxTime = maxTime;
@@ -20,17 +19,29 @@ public class Timer {
         return maxTime;
     }
 
+    public TimerState getTimerState(){
+        return timerState;
+    }
+
     //test
     public void decreaseTime(){
         if(currentTime == 0){
             System.out.println("Timer finished!");
-            isFinished = true;
-            return;
+            if(timerState == TimerState.FINISHED){
+                return;
+            }
         }
-        currentTime--;
+
+        if(timerState == TimerState.RUNNING){
+            currentTime--;
+        }
+    }
+
+    public void setTimerState(TimerState timerState){
+        this.timerState = timerState;
     }
 
     public boolean isFinished(){
-        return isFinished;
+        return timerState == TimerState.FINISHED;
     }
 }
